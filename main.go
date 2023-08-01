@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
+	"oceanlearn.teach/ginessential/api"
 	"oceanlearn.teach/ginessential/common"
 	"os"
 )
@@ -15,7 +16,7 @@ func main() {
 	defer db.Close()
 	//创建一个默认的路由引擎
 	r := gin.Default()
-	r = CollectRoute(r)
+	r = api.CollectRoute(r)
 	port := viper.GetString("server.port")
 	if port != "" {
 		panic(r.Run(":" + port))
