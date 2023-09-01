@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "cfg.go",
+        "desensitization.go",
+        "log.go",
+        "trace_helper.go",
+    ],
+    importpath = "whgo/library/log",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//library/log/rules:go_default_library",
+        "@com_github_jinzhu_copier//:go_default_library",
+        "@com_github_natefinch_lumberjack//:go_default_library",
+        "@com_github_opentracing_opentracing_go//:go_default_library",
+        "@com_github_rs_xid//:go_default_library",
+        "@com_github_uber_jaeger_client_go//:go_default_library",
+        "@org_golang_google_grpc//metadata:go_default_library",
+        "@org_uber_go_zap//:go_default_library",
+        "@org_uber_go_zap//zapcore:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "desensitization_test.go",
+        "log_test.go",
+    ],
+    embed = [":go_default_library"],
+    deps = ["@org_uber_go_zap//:go_default_library"],
+)
