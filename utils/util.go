@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"github.com/forgoer/openssl"
 
+	"ginessential/library/e"
 	"math"
 	"math/rand"
 	"net/url"
-	e2 "oceanlearn.teach/ginessential/library/e"
 	"os"
 	"path"
 	"reflect"
@@ -23,7 +23,7 @@ import (
 	"github.com/shopspring/decimal"
 	"go.uber.org/zap"
 
-	"oceanlearn.teach/ginessential/library/log"
+	"ginessential/library/log"
 )
 
 // Setup Initialize the utils
@@ -184,12 +184,12 @@ func AesDecrypt(data, aesKey string) string {
 
 //手机号加密
 func PhoneEncrypt(phone string) string {
-	return AesEncrypt(phone, e2.AESKEY)
+	return AesEncrypt(phone, e.AESKEY)
 }
 
 //手机号解密
 func PhoneDecrypt(phoneCode string) string {
-	return AesDecrypt(phoneCode, e2.AESKEY)
+	return AesDecrypt(phoneCode, e.AESKEY)
 }
 
 func UrlSafeB64encode(b []byte) string {
@@ -225,13 +225,13 @@ func Chunk(arr []string, size int) [][]string {
 
 // CustomerEncrypt 用户openID加密
 func CustomerEncrypt(customerId string) string {
-	return url.QueryEscape(AesEncrypt(customerId, e2.AESKEY))
+	return url.QueryEscape(AesEncrypt(customerId, e.AESKEY))
 }
 
 // CustomerDecrypt 用户openID解密
 func CustomerDecrypt(customerId string) string {
 	id, _ := url.QueryUnescape(customerId)
-	return AesDecrypt(id, e2.AESKEY)
+	return AesDecrypt(id, e.AESKEY)
 }
 
 func CustomerShareUrl(inviteCode string) string {

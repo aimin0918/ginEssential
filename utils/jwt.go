@@ -1,8 +1,8 @@
 package utils
 
 import (
+	"ginessential/library/e"
 	"github.com/dgrijalva/jwt-go"
-	e2 "oceanlearn.teach/ginessential/library/e"
 
 	"time"
 )
@@ -21,7 +21,7 @@ type Claims struct {
 // platform :平台标识 , userId ：粉丝表中的id , userName: 微信是openid 支付宝是user_id ,  customerId:会员id
 func GenerateToken(platform int, userId int64, uId, userName string, customerId int64) (string, error) {
 	nowTime := time.Now()
-	expireTime := nowTime.Add(e2.LOGIN_TIME_OUT * time.Hour)
+	expireTime := nowTime.Add(e.LOGIN_TIME_OUT * time.Hour)
 	claims := Claims{
 		platform,
 		userId,

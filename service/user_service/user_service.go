@@ -2,8 +2,8 @@ package user_service
 
 import (
 	"context"
-	"oceanlearn.teach/ginessential/http/user_define"
-	"oceanlearn.teach/ginessential/models"
+	"ginessential/http/user_define"
+	"ginessential/models"
 )
 
 func SelectUser(ctx context.Context, req user_define.UserListReq) (resp user_define.UserListResp, err error) {

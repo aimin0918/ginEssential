@@ -1,8 +1,8 @@
 package routers
 
 import (
+	"ginessential/api/backend"
 	"github.com/gin-gonic/gin"
-	"oceanlearn.teach/ginessential/api/backend"
 )
 
 func CollectRoute(r *gin.Engine) *gin.Engine {

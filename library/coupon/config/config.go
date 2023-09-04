@@ -2,7 +2,7 @@ package config
 
 import (
 	"errors"
-	"oceanlearn.teach/ginessential/utils"
+	"ginessential/utils"
 	"os"
 )
 

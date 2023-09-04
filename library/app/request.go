@@ -3,7 +3,7 @@ package app
 import (
 	"context"
 	"errors"
-	log2 "oceanlearn.teach/ginessential/library/log"
+	"ginessential/library/log"
 
 	"github.com/astaxie/beego/validation"
 	"go.uber.org/zap"
@@ -12,7 +12,7 @@ import (
 // MarkErrors logs error logs
 func MarkErrors(ctx context.Context, errors []*validation.Error) {
 	for _, err := range errors {
-		log2.ErrorWithCtx(ctx, err.Key, zap.String("msg", err.Message))
+		log.ErrorWithCtx(ctx, err.Key, zap.String("msg", err.Message))
 	}
 
 	return
@@ -21,7 +21,7 @@ func MarkErrors(ctx context.Context, errors []*validation.Error) {
 func (g *Gin) GetRequest(params interface{}) (err error) {
 	err = g.C.ShouldBind(params)
 	if err != nil {
-		log2.ErrorWithCtx(g.C, "参数错误", zap.Any("params", params), zap.Error(err))
+		log.ErrorWithCtx(g.C, "参数错误", zap.Any("params", params), zap.Error(err))
 		return
 	}
 

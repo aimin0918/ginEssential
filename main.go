@@ -1,11 +1,11 @@
 package main
 
 import (
+	"ginessential/models"
+	"ginessential/routers"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
-	"oceanlearn.teach/ginessential/models"
-	"oceanlearn.teach/ginessential/routers"
 	"os"
 )
 

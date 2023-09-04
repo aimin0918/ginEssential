@@ -3,7 +3,7 @@ package channel
 import (
 	"errors"
 	"fmt"
-	"oceanlearn.teach/ginessential/library/coupon/config"
+	"ginessential/library/coupon/config"
 )
 
 func newCoupon(couponConfig *config.CouponConfig) (Coupon, error) {

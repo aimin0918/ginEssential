@@ -2,7 +2,7 @@ package channel
 
 import (
 	"context"
-	"oceanlearn.teach/ginessential/library/coupon/config"
+	"ginessential/library/coupon/config"
 )
 
 type base struct {

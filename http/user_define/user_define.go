@@ -1,6 +1,6 @@
 package user_define
 
-import "oceanlearn.teach/ginessential/models"
+import "ginessential/models"
 
 type Users struct {
 	Id        int64  `json:"id" form:"id"`

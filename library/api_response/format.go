@@ -2,8 +2,8 @@ package api_response
 
 import (
 	"fmt"
+	"ginessential/library/log"
 	"net/http"
-	"oceanlearn.teach/ginessential/library/log"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"

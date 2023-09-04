@@ -1,9 +1,9 @@
 package app
 
 import (
+	"ginessential/library/e"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	e2 "oceanlearn.teach/ginessential/library/e"
 )
 
 type Gin struct {
@@ -20,7 +20,7 @@ type Response struct {
 func (g *Gin) Response(errCode int, data interface{}) {
 	g.C.JSON(http.StatusOK, Response{
 		Code: errCode,
-		Msg:  e2.GetMsg(errCode),
+		Msg:  e.GetMsg(errCode),
 		Data: data,
 	})
 	return

@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"oceanlearn.teach/ginessential/library/coupon/channel"
+	"ginessential/library/coupon/channel"
 	"testing"
 )
 

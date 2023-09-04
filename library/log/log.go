@@ -3,7 +3,7 @@ package log
 import (
 	"context"
 
-	rules2 "oceanlearn.teach/ginessential/library/log/rules"
+	"ginessential/library/log/rules"
 	"os"
 
 	"strings"
@@ -259,7 +259,7 @@ func doLog(level int, msg string, fields ...zap.Field) {
 }
 
 func filter(field *zap.Field) *zap.Field {
-	return rules2.Filter(field)
+	return rules.Filter(field)
 }
 
 //func init() {
