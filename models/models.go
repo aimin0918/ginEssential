@@ -2,11 +2,17 @@ package models
 
 import (
 	"fmt"
+	"ginessential/utils"
 	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
 )
 
 var Db *gorm.DB
+
+type BaseModel struct {
+	CreatedAt *utils.XTime `json:"created_at"`
+	UpdatedAt *utils.XTime `json:"updated_at"`
+}
 
 func InitDB() *gorm.DB {
 	driverName := viper.GetString("datasource.driverName")
@@ -16,7 +22,7 @@ func InitDB() *gorm.DB {
 	username := viper.GetString("datasource.username")
 	password := viper.GetString("datasource.password")
 	charset := viper.GetString("datasource.charset")
-	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
+	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true&loc=Local",
 		username,
 		password,
 		host,

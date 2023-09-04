@@ -7,6 +7,7 @@ import (
 )
 
 const Day = time.Hour * 24
+const DateFormat = "2006-01-02"
 const TimeFormat = "2006-01-02 15:04:05"
 
 type XTime struct {
