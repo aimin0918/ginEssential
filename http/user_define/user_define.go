@@ -8,16 +8,19 @@ type UserListReq struct {
 }
 
 type UserListResp struct {
-	List     []models.Users `json:"list" form:"list"`
-	Count    int            `json:"count" form:"count"`
-	Page     int            `json:"page" form:"page"`
-	PageSize int            `json:"page_size" form:"page_size"`
+	UserList []models.User `json:"user_list" form:"user_list"`
+	Count    int           `json:"count" form:"count"`
+	Page     int           `json:"page" form:"page"`
+	PageSize int           `json:"page_size" form:"page_size"`
 }
+
 type UserDetailRep struct {
 	Id int64 `json:"id" form:"id"`
 }
+
 type UserDetailResp struct {
-	User []models.Users `json:"user" form:"user"`
+	User models.User `json:"user" form:"user"`
+	Root models.Root `json:"root" form:"root"`
 }
 
 type UpsertUserResp struct {
@@ -25,4 +28,5 @@ type UpsertUserResp struct {
 	Name      string `json:"name" form:"name"`
 	Telephone string `json:"telephone" form:"telephone"`
 	Password  string `json:"password" form:"password"`
+	RootId    int64  `json:"root_id" form:"root_id"`
 }

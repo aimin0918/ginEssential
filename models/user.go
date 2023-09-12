@@ -5,16 +5,17 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type Users struct {
+type User struct {
 	Id        int64  `json:"id"`
 	Name      string `json:"name"`
 	Telephone string `json:"telephone"`
 	Password  string `json:"password"`
+	RootId    int64  `json:"root_id"`
 	BaseModel
 }
 
-func UserList(ctx context.Context, page, pageSize int) (users []Users, count int, err error) {
-	model := Db.Model(&Users{})
+func UserList(ctx context.Context, page, pageSize int) (user []User, count int, err error) {
+	model := Db.Model(&User{})
 	err = model.Count(&count).Error
 	if err != nil {
 		return
@@ -25,27 +26,28 @@ func UserList(ctx context.Context, page, pageSize int) (users []Users, count int
 	if pageSize > 0 {
 		model = model.Limit(pageSize).Offset((page - 1) * pageSize)
 	}
-	err = model.Order("id asc").Find(&users).Error
+	err = model.Order("id asc").Find(&user).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return
 	}
 	return
 }
 
-func GetUserDetail(ctx context.Context, Id int64) (users []Users, err error) {
-	err = Db.Model(&Users{}).Where("id=?", Id).First(&users).Error
+func GetUserDetail(ctx context.Context, Id int64) (user User, err error) {
+	err = Db.Model(&User{}).Where("id=?", Id).Order("id desc").Find(&user).Error
 	return
 }
 
-func UpsertUser(ctx context.Context, users Users) (err error) {
-	if users.Id == 0 {
-		err = Db.Model(&Users{}).Create(&users).Error
+func UpsertUser(ctx context.Context, user User) (err error) {
+	if user.Id == 0 {
+		err = Db.Model(&User{}).Create(&user).Error
 	} else {
-		err = Db.Model(&Users{}).Where("id = ?", users.Id).Updates(map[string]interface{}{
-			"id":        users.Id,
-			"name":      users.Name,
-			"telephone": users.Telephone,
-			"password":  users.Password,
+		err = Db.Model(&User{}).Where("id = ?", user.Id).Updates(map[string]interface{}{
+			"id":        user.Id,
+			"name":      user.Name,
+			"telephone": user.Telephone,
+			"password":  user.Password,
+			"root_id":   user.RootId,
 		}).Error
 	}
 	if err != nil {
@@ -55,7 +57,7 @@ func UpsertUser(ctx context.Context, users Users) (err error) {
 }
 
 func DeleteUser(ctx context.Context, id int64) (err error) {
-	err = Db.Where("Id = ?", id).Delete(&Users{}).Error
+	err = Db.Where("Id = ?", id).Delete(&User{}).Error
 	if err != nil {
 		return
 	}

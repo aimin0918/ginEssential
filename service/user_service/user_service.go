@@ -18,7 +18,8 @@ func UserList(ctx context.Context, req user_define.UserListReq) (resp user_defin
 	if err != nil {
 		return
 	}
-	resp.List = list
+
+	resp.UserList = list
 	resp.Count = count
 	resp.Page = req.Page
 	resp.PageSize = req.PageSize
@@ -27,20 +28,29 @@ func UserList(ctx context.Context, req user_define.UserListReq) (resp user_defin
 }
 
 func GetUserDetail(ctx context.Context, Id int64) (resp user_define.UserDetailResp, err error) {
+	//uc := cache.UserCache{}
 	user, err := models.GetUserDetail(ctx, Id)
 	if err != nil {
 		return
 	}
+
+	root, err := models.GetRootDetail(ctx, user.RootId)
+	if err != nil {
+		return
+	}
+
 	resp.User = user
+	resp.Root = root
 	return
 }
 
 func UpsertUser(ctx context.Context, req user_define.UpsertUserResp) (err error) {
-	User := models.Users{
+	User := models.User{
 		Id:        req.Id,
 		Name:      req.Name,
 		Telephone: req.Telephone,
 		Password:  req.Password,
+		RootId:    req.RootId,
 	}
 	err = models.UpsertUser(ctx, User)
 	if err != nil {
