@@ -31,7 +31,7 @@ func UserList(ctx context.Context, req user_define.UserListReq) (resp user_defin
 func GetUserDetail(ctx context.Context, Id int64) (resp user_define.UserDetailResp, err error) {
 	uc := cache.UserCache{}
 	user, err := uc.GetUserOrderById(ctx, Id)
-	//user, err := models.GetUserDetail(ctx, Id)
+
 	if err != nil {
 		return
 	}
