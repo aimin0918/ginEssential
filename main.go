@@ -1,6 +1,7 @@
 package main
 
 import (
+	v8 "ginessential/library/redis/v8"
 	"ginessential/models"
 	"ginessential/routers"
 	"github.com/gin-gonic/gin"
@@ -11,6 +12,7 @@ import (
 
 //go run main.go routes.go 启动
 func main() {
+	v8.LoadRedis()
 	InitConfig()
 	db := models.InitDB()
 	defer db.Close()
@@ -26,7 +28,7 @@ func main() {
 
 func InitConfig() {
 	workDir, _ := os.Getwd()
-	viper.SetConfigName("application")
+	viper.SetConfigName("dev/application")
 	viper.SetConfigType("yml")
 	viper.AddConfigPath(workDir + "/config")
 	err := viper.ReadInConfig()

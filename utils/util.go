@@ -36,7 +36,7 @@ func GetCurrentAbPathByCaller() string {
 		if index != -1 {
 			return abPath[0 : index+len("whgo_xjd/")]
 		} else {
-			log.Fatal("项目文件夹必须使用whgo_xjd命名", zap.String("path", abPath))
+			log.Fatal("项目文件夹必须使用ginEssential命名", zap.String("path", abPath))
 		}
 		return abPath
 	}

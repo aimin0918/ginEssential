@@ -2,6 +2,7 @@ package root_service
 
 import (
 	"context"
+	"ginessential/cache"
 	"ginessential/http/root_define"
 	"ginessential/models"
 )
@@ -26,7 +27,9 @@ func RootList(ctx context.Context, req root_define.RootListReq) (resp root_defin
 }
 
 func GetRootDetail(ctx context.Context, id int64) (resp root_define.RootDetailResp, err error) {
-	root, err := models.GetRootById(ctx, id)
+	rc := cache.RootCache{}
+	root, err := rc.GetRootOrderById(ctx, id)
+	//root, err := models.GetRootById(ctx, id)
 	if err != nil {
 		return
 	}
