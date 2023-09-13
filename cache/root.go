@@ -36,3 +36,27 @@ func (u *RootCache) GetRootOrderById(ctx context.Context, Id int64) (root models
 
 	return
 }
+
+func (u *RootCache) GetRootOrder(ctx context.Context, Id int64) (root models.Root, err error) {
+	redisCil, _ := redis.GetRedis(ctx)
+	key := fmt.Sprintf(cache.RootList["rootList"], Id)
+	cacheVal, err := redisCil.Get(ctx, key).Result()
+	if err != nil {
+		err = nil
+
+		// 缓存解析失败回表查询
+		root, err = models.GetRootDetail(ctx, Id)
+		if err != nil {
+			return
+		}
+
+		cacheByte, _ := json.Marshal(root)
+		redisCil.Set(ctx, key, string(cacheByte), utils.Day)
+
+		return
+	}
+
+	_ = json.Unmarshal([]byte(cacheVal), &root)
+
+	return
+}

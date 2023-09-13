@@ -42,6 +42,10 @@ var Root = map[string]string{
 	"root": addPreKey("root:id_%d"),
 }
 
+var RootList = map[string]string{
+	"rootList": addPreKey("rootList:id_%d"),
+}
+
 var SolarDay = map[string]string{
 	"solar": addPreKey("solar-day:%s"), // 节气
 }

@@ -2,6 +2,7 @@ package user_service
 
 import (
 	"context"
+	"ginessential/cache"
 	"ginessential/http/user_define"
 	"ginessential/models"
 )
@@ -28,13 +29,16 @@ func UserList(ctx context.Context, req user_define.UserListReq) (resp user_defin
 }
 
 func GetUserDetail(ctx context.Context, Id int64) (resp user_define.UserDetailResp, err error) {
-	//uc := cache.UserCache{}
-	user, err := models.GetUserDetail(ctx, Id)
+	uc := cache.UserCache{}
+	user, err := uc.GetUserOrderById(ctx, Id)
+	//user, err := models.GetUserDetail(ctx, Id)
 	if err != nil {
 		return
 	}
 
-	root, err := models.GetRootDetail(ctx, user.RootId)
+	rc := cache.RootCache{}
+	root, err := rc.GetRootOrder(ctx, user.RootId)
+	//root, err := models.GetRootDetail(ctx, user.RootId)
 	if err != nil {
 		return
 	}

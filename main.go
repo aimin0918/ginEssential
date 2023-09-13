@@ -12,7 +12,6 @@ import (
 
 //go run main.go routes.go 启动
 func main() {
-	v8.LoadRedis()
 	InitConfig()
 	db := models.InitDB()
 	defer db.Close()
@@ -27,8 +26,9 @@ func main() {
 }
 
 func InitConfig() {
+	v8.LoadRedis()
 	workDir, _ := os.Getwd()
-	viper.SetConfigName("dev/application")
+	viper.SetConfigName("dev/db")
 	viper.SetConfigType("yml")
 	viper.AddConfigPath(workDir + "/config")
 	err := viper.ReadInConfig()
